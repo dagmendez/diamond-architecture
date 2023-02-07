@@ -4,7 +4,6 @@ import com.github.dagmendez.converter.Converter
 import com.github.dagmendez.repository.RepositoryFacade
 
 trait Save[Input, Intermediate] extends Command[Input, Input]:
- 
   override def execute(input: Input): Input =
     val converted: Intermediate = converter.convert(input)
     val result: Intermediate = repository.run(converted)
