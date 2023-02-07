@@ -51,12 +51,9 @@ lazy val `core-headers`: Project = (project in file("01-core-contracts"))
   .settings(commonSettings)
   .settings(commonDependencies)
 
-
 lazy val core: Project = (project in file ("02-core"))
   .dependsOn(`core-headers` % Utils.Cctt)
   .settings(commonSettings)
-
-
 
 lazy val main: Project = (project in file("03-main"))
   .dependsOn(core % Utils.Cctt)
