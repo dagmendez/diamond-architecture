@@ -5,4 +5,3 @@ import com.github.dagmendez.repository.RepositoryFacade
 
 trait Command[Input, Output]:
   def execute(input: Input): Output
-
