@@ -1,10 +1,7 @@
 package com.github.dagmendez.command
 
 
-trait CommandCallable[Input, Output]:
-  def commandCallable(
-    command: Command[Input, Output],
-    input: Input): Command[Input, Output]
+trait CommandCallable[Input, Output](command: Command[Input, Output], input: Input):
   def call(): Output
 
 
