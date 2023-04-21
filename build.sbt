@@ -33,15 +33,12 @@ lazy val commonScalacOptions = Seq(
 lazy val commonDependencies = Seq(
   libraryDependencies ++= Seq(
     Dependencies.org.scalatest.scalatest,
-    Dependencies.org.scalatestplus.`scalacheck-1-15`
+    Dependencies.org.scalatestplus.`scalacheck-1-15`,
   )
 )
 
-lazy val root: Project = (project in file ("."))
-  .aggregate(
-    `core-headers`,
-    core,
-    main)
+lazy val root: Project = (project in file("."))
+  .aggregate(`core-headers`, core, main)
   .settings(
     name := "diamond-architecture"
   )
@@ -51,7 +48,7 @@ lazy val `core-headers`: Project = (project in file("01-core-contracts"))
   .settings(commonSettings)
   .settings(commonDependencies)
 
-lazy val core: Project = (project in file ("02-core"))
+lazy val core: Project = (project in file("02-core"))
   .dependsOn(`core-headers` % Utils.Cctt)
   .settings(commonSettings)
 
