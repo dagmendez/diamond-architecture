@@ -11,6 +11,6 @@ in a wide variety of storage solution to maximize their performance for a given 
 
 # Diagrams
 
-* [Sequence Diagram](/doc/Diamond architecture sequence diagram.png)
-* [Diamond Pipeline](/doc/DiamondPipeline with RepositoryFacade.png)
-* [Machinist Diagram](/doc/Machinist Class Diagram.png)
+* [Sequence Diagram](doc/Diamond architecture sequence diagram.png)
+* [Diamond Pipeline](doc/DiamondPipeline with RepositoryFacade.png)
+* [Machinist Diagram](doc/Machinist Class Diagram.png)
