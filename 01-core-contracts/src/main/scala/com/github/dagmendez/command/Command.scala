@@ -1,26 +1,21 @@
 package com.github.dagmendez.command
 
-
-
 trait Command[Input, Output]:
   def execute(input: Input): Output
 end Command
 
-trait Delete[Input, Query](
-  keyGenerator: Input => Query,
-  repositoryCallback: Query => Unit
-) extends Command[Input, Unit]:
-
+trait Delete[Input, Query] extends Command[Input, Unit]:
+  val keyGenerator: Input => Query
+  val repositoryCallback: Query => Unit
   override def execute(input: Input): Unit =
     val key = keyGenerator.apply(input)
     repositoryCallback.apply(key)
 end Delete
 
-trait FindAllCommand[Input, Query, Intermediate, Output](
-  keyGenerator: Input => Query,
-  converter: Conversion[Intermediate, Output],
-  repositoryCallback: Query => Vector[Intermediate]
-) extends Command[Input, Vector[Output]]:
+trait FindAllCommand[Input, Query, Intermediate, Output] extends Command[Input, Vector[Output]]:
+  val keyGenerator: Input => Query
+  val converter: Conversion[Intermediate, Output]
+  val repositoryCallback: Query => Vector[Intermediate]
 
   override def execute(input: Input): Vector[Output] =
     val query: Query = keyGenerator(input)
@@ -29,12 +24,11 @@ trait FindAllCommand[Input, Query, Intermediate, Output](
     answerToOutputType
 end FindAllCommand
 
-trait FindCommand[Input, Query, Intermediate, Output](
-  keyGenerator: Input => Query,
-  converter: Conversion[Intermediate, Output],
-  repositoryCallback: Query => Intermediate
-) extends Command[Input, Output]:
-
+trait FindCommand[Input, Query, Intermediate, Output] extends Command[Input, Output]:
+  val  keyGenerator: Input => Query
+  val converter: Conversion[Intermediate, Output]
+  val repositoryCallback: Query => Intermediate
+  
   override def execute(input: Input): Output =
     val query: Query = keyGenerator.apply(input)
     val repositoryAnswer: Intermediate = repositoryCallback.apply(query)
@@ -42,11 +36,10 @@ trait FindCommand[Input, Query, Intermediate, Output](
     answerToOutputType
 end FindCommand
 
-trait SaveCommand[Input, Intermediate, Output](
-  converter: Conversion[Input, Intermediate],
-  reverseConverter: Conversion[Intermediate, Input],
-  repositoryCallback: Intermediate => Intermediate
-) extends Command[Input, Input]:
+trait SaveCommand[Input, Intermediate, Output] extends Command[Input, Input]:
+  val converter: Conversion[Input, Intermediate]
+  val reverseConverter: Conversion[Intermediate, Input]
+  val repositoryCallback: Intermediate => Intermediate
 
   override def execute(input: Input): Input =
     val inputToIntermediate: Intermediate = converter.convert(input)
@@ -54,9 +47,3 @@ trait SaveCommand[Input, Intermediate, Output](
     val answerToInputType: Input = reverseConverter.convert(repositoryAnswer)
     answerToInputType
 end SaveCommand
-
-
-
-
-
-
