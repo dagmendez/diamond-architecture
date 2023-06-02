@@ -3,7 +3,7 @@ object Dependencies {
   object org {
     object scalatest {
       val scalatest: ModuleID =
-        "org.scalatest" %% "scalatest" % "3.2.11" % Test
+        "org.scalatest" %% "scalatest" % "3.2.16" % Test
     }
 
     object scalatestplus {

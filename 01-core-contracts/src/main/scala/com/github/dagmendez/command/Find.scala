@@ -1,7 +1,6 @@
 package com.github.dagmendez.command
 
 import com.github.dagmendez.converter.Converter
-import com.github.dagmendez.repository.RepositoryFacade
 
 trait Find[Input, Intermediate, Output, Query] extends Command[Input, Output]:
   override def execute(input: Input): Output =

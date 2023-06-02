@@ -4,12 +4,11 @@ addCommandAlias("ls", "projects")
 addCommandAlias("cd", "project")
 addCommandAlias("root", "cd root")
 addCommandAlias("c", "compile")
-addCommandAlias("ca", "Test / compile")
+addCommandAlias("ct", "Test / compile")
 addCommandAlias("t", "test")
 addCommandAlias("r", "run")
 addCommandAlias("rs", "reStart")
 addCommandAlias("s", "reStop")
-addCommandAlias("star", "thankYouStars")
 addCommandAlias(
   "styleCheck",
   "scalafmtSbtCheck; scalafmtCheckAll",
@@ -20,7 +19,7 @@ addCommandAlias(
 )
 addCommandAlias(
   "up2date",
-  "reload plugins; dependencyUpdates; reload return; dependencyUpdates",
+  "reload plugins; reload return; dependencyUpdates",
 )
 
 onLoadMessage +=
@@ -32,12 +31,11 @@ onLoadMessage +=
       |│ ${Utils.styled("cd")}          │ project           │
       |│ ${Utils.styled("root")}        │ cd root           │
       |│ ${Utils.styled("c")}           │ compile           │
-      |│ ${Utils.styled("ca")}          │ compile all       │
+      |│ ${Utils.styled("ct")}          │ compile test      │
       |│ ${Utils.styled("t")}           │ test              │
       |│ ${Utils.styled("r")}           │ run               │
       |│ ${Utils.styled("rs")}          │ reStart           │
       |│ ${Utils.styled("s")}           │ reStop            │
-      |│ ${Utils.styled("star")}        │ thankYouStars     │
       |│ ${Utils.styled("styleCheck")}  │ fmt check         │
       |│ ${Utils.styled("styleFix")}    │ fmt               │
       |│ ${Utils.styled("up2date")}     │ dependencyUpdates │
