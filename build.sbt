@@ -1,29 +1,41 @@
-import sbt._
+import sbt.*
+import Dependencies.*
 
-ThisBuild / scalaVersion := "3.3.0"
-ThisBuild / organization := "com.github.dagmendez"
-ThisBuild / organizationName := "dagmendez"
-
-ThisBuild / scalacOptions ++=
+inThisBuild(
   Seq(
-    "-deprecation",
-    "-explain",
-    "-feature",
-    "-language:implicitConversions",
-    "-unchecked",
-    "-Xfatal-warnings",
-    "-Yexplicit-nulls", // experimental (I've seen it cause issues with circe)
-    "-Ykind-projector",
-    "-Ysafe-init", // experimental (I've seen it cause issues with circe)
-    "-Wunused:all",
-    "-Wvalue-discard"
-  ) ++ Seq("-rewrite", "-indent") ++ Seq("-source", "future-migration")
-
-lazy val commonSettings = commonScalacOptions ++ Seq(
-  update / evictionWarningOptions := EvictionWarningOptions.empty
+    organization := "com.github.dagmendez",
+    organizationName := "dagmendez",
+    scalaVersion := "3.3.0",
+    scalafixDependencies += SbtPlugins.organizeImports,
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision,
+    scalacOptions ++=
+      Seq(
+        "-deprecation",
+        "-explain",
+        "-feature",
+        "-language:implicitConversions",
+        "-unchecked",
+        "-Xfatal-warnings",
+        "-Yexplicit-nulls", // experimental (I've seen it cause issues with circe)
+        "-Ykind-projector",
+        "-Ysafe-init", // experimental (I've seen it cause issues with circe)
+        "-Wunused:all",
+        "-Wvalue-discard",
+        "-rewrite",
+        "-indent",
+        "-source",
+        "future-migration",
+      ),
+  )
 )
 
-lazy val commonScalacOptions = Seq(
+lazy val commonSettings =
+  commonScalacOptions ++ Seq(
+    update / evictionWarningOptions := EvictionWarningOptions.empty
+  )
+
+lazy val commonScalacOptions: Seq[Def.Setting[Task[Seq[String]]]] = Seq(
   Compile / console / scalacOptions --= Seq(
     "-Wunused:_",
     "-Xfatal-warnings",
@@ -32,7 +44,7 @@ lazy val commonScalacOptions = Seq(
     (Compile / console / scalacOptions).value,
 )
 
-lazy val commonDependencies = Seq(
+lazy val commonDependencies: Seq[Def.Setting[Seq[ModuleID]]] = Seq(
   libraryDependencies ++= Seq(
     Dependencies.org.scalatest.scalatest,
     Dependencies.org.scalatestplus.`scalacheck-1-15`,
