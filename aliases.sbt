@@ -1,42 +1,75 @@
+import Utils.*
+
 addCommandAlias("l", "projects")
+
 addCommandAlias("ll", "projects")
+
 addCommandAlias("ls", "projects")
+
 addCommandAlias("cd", "project")
-addCommandAlias("root", "cd root")
+
+addCommandAlias("root", "cd poc-scala-data-streaming")
+
 addCommandAlias("c", "compile")
+
 addCommandAlias("ct", "Test / compile")
+
 addCommandAlias("t", "test")
+
 addCommandAlias("r", "run")
+
 addCommandAlias("rs", "reStart")
+
 addCommandAlias("s", "reStop")
+
 addCommandAlias(
   "styleCheck",
   "scalafmtSbtCheck; scalafmtCheckAll",
 )
+
 addCommandAlias(
   "styleFix",
-  "scalafmtSbt; scalafmtAll",
+  "scalafix; scalafmtSbt; scalafmtAll",
 )
+
+addCommandAlias(
+  "explicit",
+  "undeclaredCompileDependenciesTest",
+)
+
 addCommandAlias(
   "up2date",
   "reload plugins; reload return; dependencyUpdates",
 )
 
+addCommandAlias(
+  "runCoverage",
+  "clean; coverage; test; coverageReport; coverageAggregate",
+)
+
+addCommandAlias(
+  "runMain",
+  "main / run",
+)
+
 onLoadMessage +=
   s"""|
-      |╭─────────────────────────────────╮
-      |│     List of defined ${Utils.styled("aliases")}     │
-      |├─────────────┬───────────────────┤
-      |│ ${Utils.styled("l")} | ${Utils.styled("ll")} | ${Utils.styled("ls")} │ projects          │
-      |│ ${Utils.styled("cd")}          │ project           │
-      |│ ${Utils.styled("root")}        │ cd root           │
-      |│ ${Utils.styled("c")}           │ compile           │
-      |│ ${Utils.styled("ct")}          │ compile test      │
-      |│ ${Utils.styled("t")}           │ test              │
-      |│ ${Utils.styled("r")}           │ run               │
-      |│ ${Utils.styled("rs")}          │ reStart           │
-      |│ ${Utils.styled("s")}           │ reStop            │
-      |│ ${Utils.styled("styleCheck")}  │ fmt check         │
-      |│ ${Utils.styled("styleFix")}    │ fmt               │
-      |│ ${Utils.styled("up2date")}     │ dependencyUpdates │
-      |╰─────────────┴───────────────────╯""".stripMargin
+      |╭─────────────┴─────────────────────────────╮
+      |│     List of defined ${styled("aliases")}               │
+      |├─────────────┴─────────────────────────────┤
+      |│ ${styled("l")} | ${styled("ll")} | ${styled("ls")} │ projects                    │
+      |│ ${styled("cd")}          │ project                     │
+      |│ ${styled("root")}        │ cd root                     │
+      |│ ${styled("c")}           │ compile                     │
+      |│ ${styled("ct")}          │ compile test                │
+      |│ ${styled("t")}           │ test                        │
+      |│ ${styled("r")}           │ run                         │
+      |│ ${styled("rs")}          │ reStart                     │
+      |│ ${styled("s")}           │ reStop                      │
+      |│ ${styled("styleCheck")}  │ scala fix & fmt check       │
+      |│ ${styled("styleFix")}    │ scala fix & fmt             │
+      || ${styled("explicit")}    | transitive dependency check |
+      |│ ${styled("up2date")}     │ dependency updates          │
+      |│ ${styled("runCoverage")} │ coverage report             │
+      |│ ${styled("runMain")}     │ run main                    │
+      |╰─────────────┴─────────────────────────────╯""".stripMargin
