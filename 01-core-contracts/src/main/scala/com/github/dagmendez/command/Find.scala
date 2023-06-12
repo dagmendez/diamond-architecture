@@ -1,13 +1,11 @@
 package com.github.dagmendez.command
 
-import com.github.dagmendez.converter.Converter
-
 trait Find[Input, Intermediate, Output, Query] extends Command[Input, Output]:
   override def execute(input: Input): Output =
-    val key: Query = generator.apply(input)
-    val result: Intermediate = callback.apply(key)
-    valueConverter.reverse().convert(result)
+    val query: Query = queryGenerator(input)
+    val result: Intermediate = callback(query)
+    reverseConverter(result)
 
-  lazy val generator: Input => Query
-  lazy val callback: Query => Intermediate
-  lazy val valueConverter: Converter[Output, Intermediate]
+  def queryGenerator(input: Input): Query
+  def callback(query: Query): Intermediate
+  def reverseConverter: Conversion[Intermediate, Output]
